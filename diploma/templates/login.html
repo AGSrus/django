@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content%}
+<div class="container mt-3">
+
+  <form action="" method="POST" class="card p-2">
+    <img class="mb-4" src="{% static "logo.svg" %}" alt="" width="72" height="72">
+    {% csrf_token %}
+    {{ form }}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+  </form>
+</div>
+{% endblock %}

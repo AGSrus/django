@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content%}
+
+
+<main role="main">
+
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-4">Добро пожаловать на сайт просто магазина</h1>
+    </div>
+  </div>
+
+  {% for article in articles %}
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-4">{{ article.title }}</h1>
+      <p>{{ article.text|truncatewords:20 }}</p>
+      <p>{{ article.date_pub }}</p>
+    </div>
+  </div>
+
+  <div class="container mb-5">
+      <div class="row">
+        {% for product in article.product.all %}
+        <div class="col-md-4">
+          <h2>{{ product.name|title }}</h2>
+          <h3>{{ product.price }}</h3>
+          <a href="{{ product.get_absolute_url}}">
+            <img src="static/{{ product.img }}" width="180">
+          </a>
+          <a href='{% url 'add_product_in_cart' product_id=product.id %}'><button type='sumbit' class="btn btn-secondary">Добавить в корзину »</button></a>
+        </div>
+        {% endfor %}
+      </div>
+  </div>
+  {% endfor %}
+</main>
+{% endblock %}
